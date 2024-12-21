@@ -8,10 +8,21 @@
             rel="stylesheet"
             href="{{ .Site.BaseURL }}css/fullcalendar.min.css"
         />
+        <link rel="stylesheet" href="{{ .Site.BaseURL }}css/main.css" />
     </head>
 
     <body>
+        <h1>SF City Hall Lighting Schedule</h1>
         <div id="calendar"></div>
+
+        <p>
+            Scrapes data from
+            <a href="https://www.sf.gov/location/san-francisco-city-hall"
+                >sf.gov</a
+            >, source code
+            <a href="https://github.com/lily-mara/sf-city-hall-lights">here</a>,
+            made by <a href="https://lilymara.xyz/">Lily</a>.
+        </p>
 
         <script src="{{ .Site.BaseURL }}js/moment.min.js"></script>
         <script src="{{ .Site.BaseURL }}/js/jquery.min.js"></script>
