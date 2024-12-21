@@ -1,35 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{{ .Title }}</title>
+        <link
+            rel="stylesheet"
+            href="{{ .Site.BaseURL }}css/fullcalendar.min.css"
+        />
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>{{ .Title }}</title>
-    <link rel='stylesheet' href='{{ .Site.BaseURL }}css/fullcalendar.min.css' />
+    <body>
+        <div id="calendar"></div>
 
-</head>
+        <script src="{{ .Site.BaseURL }}js/moment.min.js"></script>
+        <script src="{{ .Site.BaseURL }}/js/jquery.min.js"></script>
+        <script src="{{ .Site.BaseURL }}/js/jquery-ui.custom.min.js"></script>
+        <script src="{{ .Site.BaseURL }}/js/fullcalendar.min.js"></script>
 
-<body>
+        <script>
+            $(document).ready(function () {
+                const events = [
+                    {{ range $index, $e := (where .Site.RegularPages "Type" "event" ) }}
+                    {
+                        title: "{{ .Title }}",
+                        start: "{{ dateFormat "2006-01-02" .Params.start }}",
+                        end: "{{ dateFormat "2006-01-02" .Params.end }}",
+                        allDay: {{ .Params.allday }},
+                        url: "{{ .Permalink | absURL }}",
+                        color: "{{.Params.color}}",
+                        rendering: 'background',
+                    },
+                    {{ end }}
+                ];
 
-    <div id="calendar"></div>
-
-    <script src='{{ .Site.BaseURL }}js/moment.min.js'></script>
-    <script src='{{ .Site.BaseURL }}/js/jquery.min.js'></script>
-    <script src='{{ .Site.BaseURL }}/js/jquery-ui.custom.min.js'></script>
-    <script src='{{ .Site.BaseURL }}/js/fullcalendar.min.js'></script>
-
-    <script>
-        $(document).ready(function () {
-
-            console.log("Ready...");
-
-            $('#calendar').fullCalendar({
-                events: '{{ .Site.BaseURL }}event/index.json'
-            })
-
-        });
-    </script>
-
-</body>
-
+                $("#calendar").fullCalendar({
+                    events: events,
+                });
+            });
+        </script>
+    </body>
 </html>
