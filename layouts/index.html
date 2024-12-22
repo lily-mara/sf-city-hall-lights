@@ -40,6 +40,7 @@
                         allDay: {{ .Params.allday }},
                         url: "{{ .Permalink | absURL }}",
                         color: "{{.Params.color}}",
+                        {{if eq .Params.color "white" }} textColor: 'black', {{ end }}
                         rendering: 'background',
                     },
                     {{ end }}
