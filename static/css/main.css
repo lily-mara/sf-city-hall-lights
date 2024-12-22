@@ -11,3 +11,10 @@ body {
     border: 1px solid black;
     border-radius: 10px;
 }
+
+.event-box {
+    background-color: #ffe5ec;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}

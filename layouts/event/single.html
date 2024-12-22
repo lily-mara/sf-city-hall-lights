@@ -1,17 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ .Title}}</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="{{ .Site.BaseURL }}css/main.css" />
+        <link rel="icon" type="image/pg" href="/favicon.png" />
+        <title>{{ .Title}}</title>
+    </head>
+    <body>
+        <div class="event-box">
+            <h2>{{ .Title }}</h2>
+            <p>
+                {{ dateFormat "2006-01-02" .Params.start }} - {{ dateFormat
+                "2006-01-02" .Params.end }}
+            </p>
+        </div>
 
-    <p>Event detail:</p>
-    <h2>{{ .Title }}</h2>
-    <p>Start: {{ dateFormat "2006-01-02" .Date }}</p>
-    <pre>url: {{ .Permalink | absURL }}</pre>
-    
-</body>
+        <p><a href="/">Home</a></p>
+    </body>
 </html>
