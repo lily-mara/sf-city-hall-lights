@@ -18,7 +18,7 @@ def main():
     if not schedule:
         exit(1)
 
-    date_line_regex = re.compile(r'([^–-]*) (-|–) ([^–-]*) (-|–) ((in recognition of )?(.*))')
+    date_line_regex = re.compile(r'([^–-]*) (-|–) ([^–-]*) (-|–) ((in recognition of )?(the )?(.*))')
     date_regex = re.compile(r'((January|February|March|April|May|June|July|September|October|November|December)\s*(\d+)(,?\s*(\d{4}))? through \w*,\s*)?(January|February|March|April|May|June|July|September|October|November|December)\s*(\d+),?\s*(\d{4})')
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -28,7 +28,7 @@ def main():
             groups = m.groups()
             date_part = groups[0]
             color = groups[2]
-            reason = groups[6]
+            reason = groups[7]
 
 
             m = date_regex.search(date_part)
