@@ -10,13 +10,21 @@ def main():
     html = resp.text
 
     soup = BeautifulSoup(html, features="html.parser")
-    summary = soup.find('summary', string='Lighting schedule')
+
+    with open('city-hall.html', 'w') as f:
+        f.write(soup.prettify())
+
+    heading = soup.find('h3', string='Lighting schedule')
+    if not heading:
+        raise ValueError('Page was missing "lighting schedule" h3 node')
+
+    summary = heading.parent
     if not summary:
-        exit(1)
+        raise ValueError('Page was missing "lighting schedule" h3 node\'s summary parent')
 
     schedule = summary.parent
     if not schedule:
-        exit(1)
+        raise ValueError('Page missing details node')
 
     date_line_regex = re.compile(r'([^–-]*) (-|–) ([^–-]*) (-|–) ((in recognition of )?(the )?(.*))')
     date_regex = re.compile(r'((January|February|March|April|May|June|July|September|October|November|December)\s*(\d+)(,?\s*(\d{4}))? through \w*,\s*)?(January|February|March|April|May|June|July|September|October|November|December)\s*(\d+),?\s*(\d{4})')
