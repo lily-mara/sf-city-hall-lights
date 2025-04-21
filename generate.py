@@ -36,7 +36,7 @@ def main():
             groups = m.groups()
             date_part = groups[0]
             color = groups[2]
-            reason = groups[7].replace('"', '\"')
+            reason = groups[7].replace('"', '\\"')
 
 
             m = date_regex.search(date_part)
