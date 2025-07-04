@@ -21,7 +21,10 @@ def main():
 
     if resp.status_code != 200:
         print(f'Got non-OK status code from sf.gov! status={resp.status_code}')
-        print('\n=====\n')
+        print('\n===== HEADERS =====\n')
+        for k, v in resp.headers.items():
+            print(f'{k} = {v}')
+        print('\n===== RESPONSE TEXT =====\n')
         print(resp.text)
         print('\n=====\n')
         sys.exit(1)
