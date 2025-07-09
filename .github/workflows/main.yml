@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 2 */10 * *"
 
 permissions:
   contents: read
@@ -27,8 +27,14 @@ jobs:
         run: uv python install
       - name: Install the project
         run: uv sync --all-extras --dev
+
       - name: Run Generation
-        run: uv run generate.py
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 2
+          max_attempts: 10
+          retry_wait_seconds: 30
+          command: uv run generate.py
 
       - uses: stefanzweifel/git-auto-commit-action@v5
 
